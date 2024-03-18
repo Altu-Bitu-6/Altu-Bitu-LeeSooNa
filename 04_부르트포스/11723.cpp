@@ -21,40 +21,36 @@ int main() {
 	while (n--) {
 		cin >> s; //명령 입력
 
-		if (s == "add") {
-			cin >> x;
-			S |= (1 << x);
-		}
-		else if (s == "remove") {
-			cin >> x;
-			S &= ~(1 << x);
-
-		}
-		else if (s == "check") {
-			cin >> x;
-			if (S & (1 << x)) {//x가 S에 존재하면
-				cout << "1\n";
-			}
-			else {//x가 S에 존재하지 않으면
-				cout << "0\n";
-			}
-		}
-		else if (s == "toggle") {
-			cin >> x;
-			if (S & (1 << x)) {//x가 S에 존재하면
-				S &= ~(1 << x); //remove 연산
-			}
-			else {
-				S |= (1 << x); //add 연산
-			}
-		}
-		else if (s == "all") {
+		if (s == "all") {
 			S = (1 << 21) - 1; //모두 1
-
 		}
 		else if (s == "empty") {
 			S = 0; //모두 0
 		}
-	}
+		else{ //피연산자 x가 필요한 커맨드
+			cin >> x; 
+
+			if (s == "add") {
+			S |= (1 << x);
+			}
+			else if (s == "remove") {
+			S &= ~(1 << x);
+			}
+			else if (s == "check") {
+				if (S & (1 << x)) {//x가 S에 존재하면
+					cout << "1\n";
+				}
+				else {//x가 S에 존재하지 않으면
+					cout << "0\n";
+				}
+			}
+			else if (s == "toggle") {
+				//XOR 연산
+				S ^= (1 << x);
+
+			}
+		}
+
+		}
 	return 0;
 }
